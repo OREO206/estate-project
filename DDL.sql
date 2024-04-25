@@ -84,3 +84,5 @@ CREATE TABLE board (
 CREATE USER 'developer'@'%' IDENTIFIED BY 'qwer';
 
 GRANT ALL PRIVILEGES ON estate.* TO 'developer'@'%';
+
+DROP USER 

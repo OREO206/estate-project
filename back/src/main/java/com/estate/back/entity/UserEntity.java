@@ -1,5 +1,7 @@
 package com.estate.back.entity;
 
+import com.estate.back.dto.request.auth.SignUpRequestDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// Estate 데이터베이스의 User 테이블과 매핑되는 Entity 클래스
+// estate 데이터베이스의 user 테이블과 매핑되는 Entity 클래스
 @Entity(name="user")
 @Table(name="user")
 @Getter
@@ -22,4 +24,8 @@ public class UserEntity {
     private String userEmail;
     private String userRole;
     private String joinPath;
+
+    public UserEntity(SignUpRequestDto dto) {
+        
+    }
 }

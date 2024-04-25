@@ -19,13 +19,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BoardEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer receptionNumber;
     private Boolean status;
     private String title;
     private String contents;
     private String writerId;
-    private String writerDatetime;
+    private String writeDatetime;
     private Integer viewCount;
     private String comment;
 }

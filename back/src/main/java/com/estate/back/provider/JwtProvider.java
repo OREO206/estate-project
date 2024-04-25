@@ -13,19 +13,20 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-// Jwt 생성 및 검증 기능 제공자
-// - Jwt 암호화 알고리즘 HS256
+// JWT 생성 및 검증 기능 제공자
+// - JWT 암호화 알고리즘 HS256
 // - 비밀키는 환경변수에 있는 jwt.secret-key
-// - jwt 만료 기간 10시간
+// - JWT 만료 기간 10시간 
 // TODO (이후 1시간)
+
 @Component
 public class JwtProvider {
-
+    
     @Value("${jwt.secret-key}")
     private String secretKey;
 
     // JWT 생성 메서드
-    public String create(String userId) {
+    public String create (String userId) {
 
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
@@ -40,13 +41,16 @@ public class JwtProvider {
             .compact();
 
         return jwt;
-        }
 
-        //JWT 검증 메서드
-        public String validate(String jwt) {
+    }
+
+    // JWT 검증 메서드
+    public String validate (String jwt) {
+
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+
         String userId = null;
-        
+
         try {
             userId = Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -60,6 +64,7 @@ public class JwtProvider {
         }
 
         return userId;
-        }
+
+    }
 
 }
