@@ -10,8 +10,7 @@ import com.estate.back.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 
-// Auth 모듈의 비즈니스 로직 구현
-
+// Auth 모듈의 비즈니스 로직 구현체
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImplimentation implements AuthService {
@@ -20,12 +19,12 @@ public class AuthServiceImplimentation implements AuthService {
 
     @Override
     public ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto dto) {
-    
+        
         try {
 
             String userId = dto.getUserId();
             boolean existedUser = userRepository.existsByUserId(userId);
-            if(existedUser) return ResponseDto.duplicatedId();
+            if (existedUser) return ResponseDto.duplicatedId();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -33,6 +32,7 @@ public class AuthServiceImplimentation implements AuthService {
         }
 
         return ResponseDto.success();
+
     }
     
 }

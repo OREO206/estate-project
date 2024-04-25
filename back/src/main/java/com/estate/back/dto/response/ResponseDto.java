@@ -14,7 +14,7 @@ public class ResponseDto {
     private String message;
 
     public static ResponseEntity<ResponseDto> success() {
-        ResponseDto responseBody =
+        ResponseDto responseBody = 
             new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
@@ -27,13 +27,13 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> duplicatedId() {
         ResponseDto responseBody =
-            new ResponseDto(ResponseCode.DUPLICATED_ID, ResponseMessage.DUPLICATIED_ID);
+            new ResponseDto(ResponseCode.DUPLICATED_ID, ResponseMessage.DUPLICATED_ID);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 
     public static ResponseEntity<ResponseDto> duplicatedEmail() {
         ResponseDto responseBody =
-            new ResponseDto(ResponseCode.DUPLICATED_EMAIL, ResponseMessage.DUPLICATIED_EMAIL);
+            new ResponseDto(ResponseCode.DUPLICATED_EMAIL, ResponseMessage.DUPLICATED_EMAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 
@@ -63,7 +63,8 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> databaseError() {
         ResponseDto responseBody =
-            new ResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DARABASE_ERROR);
+            new ResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
     }
+
 }
