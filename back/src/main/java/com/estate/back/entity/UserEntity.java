@@ -10,7 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// estate 데이터베이스의 user 테이블과 매핑되는 Entity 클래스
+// Estate 데이터베이스의 User 테이블과 매핑되는 Entity 클래스
+// 클래스명과 테이블 명이 달라서 직접 나열 함 (name="user")
 @Entity(name="user")
 @Table(name="user")
 @Getter
@@ -32,4 +33,5 @@ public class UserEntity {
         this.userRole = "ROLE_USER";
         this.joinPath = "HOME";
     }
+
 }

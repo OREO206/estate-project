@@ -1,4 +1,4 @@
--- Active: 1712823195861@@127.0.0.1@3306@basic
+-- Active: 1706776141213@@127.0.0.1@3306@basic
 # Entity
 # - 사용자
 # - 게시물
@@ -79,10 +79,6 @@ CREATE TABLE board (
         FOREIGN KEY(writer_id) REFERENCES user(user_id)
 );
 
-## 개발자 계정 생성
-
+## 개발자 계정 생성 
 CREATE USER 'developer'@'%' IDENTIFIED BY 'qwer';
-
 GRANT ALL PRIVILEGES ON estate.* TO 'developer'@'%';
-
-DROP USER 

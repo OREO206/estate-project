@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// estate 데이터베이스의 board 테이블과 매핑되는 Entity 클래스
+// Estate 데이터베이스의 board 테이블과 매핑되는 Entity 클래스
 @Entity(name="board")
 @Table(name="board")
 @Getter
@@ -25,7 +25,8 @@ public class BoardEntity {
     private String title;
     private String contents;
     private String writerId;
-    private String writeDatetime;
+    private String writerDatetime;
     private Integer viewCount;
     private String comment;
+    
 }

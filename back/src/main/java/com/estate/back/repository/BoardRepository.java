@@ -8,5 +8,5 @@ import com.estate.back.entity.BoardEntity;
 // estate 데이터베이스의 board 테이블 작업을 위한 리포지토리
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
-    
+
 }

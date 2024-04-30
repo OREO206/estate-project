@@ -25,44 +25,53 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-// Spring Security Filter Chain에 추가할 JWT 필터
-// - Request 객체로부터 Header 정보를 받아와서 Header에 있는 Authorization 필드의 Bearer 토큰 값을 가져와서 JWT 검증
-// - 접근주체의 권한을 확인하여 권한 등록
+
+// Spring Security Filter Chain에 등록할 JWT 필터
+// - Request 객체로부터 Header 정보를 받아와서 Header에 있는 Authorized 필드의 Bearer 토큰 값을 가져와서 JWT 검증
+// - 접근주체의 권한을 확인하여 권한 등록 
+
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter  {
 
     private final JwtProvider jwtProvider;
     private final UserRepository userRepository;
 
-    // JwtAuthenticationFilter의 실제 동작
+    // JwtAuthenticationFilter의 실제 동작 
     @Override
-    protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
         try {
-
+            
             // Request 객체에서 Bearer 토큰 값 가져오기
             String token = parseBearerToken(request);
-            if (token == null) {
+            // -- token이 null인경우
+            if (token == null){
                 filterChain.doFilter(request, response);
                 return;
             }
+
             // JWT 검증
+            // -- token에 대해서 검증
             String userId = jwtProvider.validate(token);
             if (userId == null) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            // 접근 주체에 권한을 확인
+
+            // 접근 주체에 권한을 확인 
+            // -- 검증된 token에 대해서 인증 주체에 권한 확인
             UserEntity userEntity = userRepository.findByUserId(userId);
             if (userEntity == null) {
                 filterChain.doFilter(request, response);
                 return;
             }
+
             String role = userEntity.getUserRole();
 
-            // 권한 테이블(리스트) 생성
+            // 권한 테이블 (리스트) 생성 
+            // -- 위에서 받은 권한을 권한 테이블로 생성
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(role));
 
@@ -75,30 +84,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.setContext(securityContext);
 
-        } catch (Exception exception) {
+        }catch (Exception exception) {
             exception.printStackTrace();
         }
-
+        
         filterChain.doFilter(request, response);
 
     }
-
-    // Request 객체에서 Bearer 토큰 값을 가져오는 메서드
+    
+    // Request 객체에서 Bearer 토큰 값을 가져오는 메서드 
     private String parseBearerToken (HttpServletRequest request) {
 
-        // Request 객체의 Header에서 Authorization 필드 값 추출
+        // Request 객체의 Header에서 Authorized 필드 값 추출
         String authorization = request.getHeader("Authorization");
         // Authorization 필드값 존재 여부 확인
         boolean hasAuthorization = StringUtils.hasText(authorization);
         if (!hasAuthorization) return null;
-        // bearer 인증 여부 확인
+        // bearer 인증 여부 확인 
         boolean isBearer = authorization.startsWith("Bearer ");
         if (!isBearer) return null;
 
         // Authorization 필드값에서 토큰 추출
+        // 7은 -> "Bearer " 빈공간 포함 7부터 가져오라는 뜻
         String token = authorization.substring(7);
         return token;
-
     }
-    
 }
