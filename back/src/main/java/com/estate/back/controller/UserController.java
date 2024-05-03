@@ -22,7 +22,7 @@ public class UserController {
     public ResponseEntity<? super GetSignInUserResponseDto> getSignInUser(
         @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<? super GetSignInUserResponseDto> response = userService.getSignInuser(userId);
+        ResponseEntity<? super GetSignInUserResponseDto> response = userService.getSignInUser(userId);
         return response;
     }
     
