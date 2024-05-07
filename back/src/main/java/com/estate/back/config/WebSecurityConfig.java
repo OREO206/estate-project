@@ -56,7 +56,8 @@ public class WebSecurityConfig {
         )
         .authorizeHttpRequests(request -> request
             .requestMatchers("/", "/api/v1/auth/**", "/oauth2/callback/*").permitAll()
-            .requestMatchers("api/v1/board/").hasRole("USER")
+            .requestMatchers("/api/v1/board/").hasRole("USER")
+            .requestMatchers("/api/v1/board/*/comment").hasRole("ADMIN")
             .anyRequest().authenticated()
         )
         .oauth2Login(oauth2 -> oauth2
@@ -65,8 +66,8 @@ public class WebSecurityConfig {
         .userInfoEndpoint(endpoint -> endpoint.userService(oAuth2UserService))
         .successHandler(oAuth2SuccessHandler)
         )
-        .exceptionHandling(exception -> exception
-            .authenticationEntryPoint(new AuthorizationFailEntryPoint())
+        .exceptionHandling(exeption -> exeption
+            .authenticationEntryPoint(new authorizationFailEntryPoint())
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -88,14 +89,15 @@ public class WebSecurityConfig {
 
 }
 
-class AuthorizationFailEntryPoint implements AuthenticationEntryPoint {
+class authorizationFailEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
+        
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.getWriter().write("{\"code\": \"AF\", \"message\": \"Authorization Failed\"}");
+        response.getWriter().write("{ \"code\": \"AF\", \"message\": \"Authorization Failed\" }");
     }
     
 }

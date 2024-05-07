@@ -12,13 +12,13 @@ import com.estate.back.entity.BoardEntity;
 import lombok.Getter;
 
 @Getter
-public class GetBoardResponseDto extends ResponseDto{
+public class GetBoardResponseDto extends ResponseDto {
     private Integer receptionNumber;
     private Boolean status;
     private String title;
     private String writerId;
     private String writeDatetime;
-    private int viewCount;
+    private Integer viewCount;
     private String contents;
     private String comment;
 
