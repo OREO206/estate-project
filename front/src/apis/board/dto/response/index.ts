@@ -15,7 +15,7 @@ export interface GetBoardResponseDto extends ResponseDto {
     title: string;
     writerId: string;
     writeDatetime: string;
-    viewcount: number;
+    viewCount: number;
     contents: string;
     comment: string | null;
 }
