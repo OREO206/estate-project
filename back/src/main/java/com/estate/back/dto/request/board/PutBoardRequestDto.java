@@ -13,5 +13,4 @@ public class PutBoardRequestDto {
     private String title;
     @NotBlank
     private String contents;
-    
 }

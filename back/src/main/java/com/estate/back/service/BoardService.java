@@ -18,7 +18,7 @@ public interface BoardService {
     ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord);
     ResponseEntity<? super GetBoardResponseDto> getBoard(int receptionNumber);
 
-    ResponseEntity<ResponseDto> puBoard(PutBoardRequestDto dto, int receptionNumber, String userId);
+    ResponseEntity<ResponseDto> putBoard(PutBoardRequestDto dto, int receptionNumber, String userId);
     
     ResponseEntity<ResponseDto> increaseViewCount(int receptionNumber);
 

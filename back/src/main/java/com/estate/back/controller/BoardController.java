@@ -78,7 +78,7 @@ public class BoardController {
         @PathVariable("receptionNumber") int receptionNumber,
         @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = boardService.puBoard(requestBody, receptionNumber, userId);
+        ResponseEntity<ResponseDto> response = boardService.putBoard(requestBody, receptionNumber, userId);
         return response;
     }
 
@@ -91,7 +91,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/{receptionNumber}")
-    public ResponseEntity<ResponseDto> deleteBoard(
+    public ResponseEntity<ResponseDto> deleteBoard (
         @PathVariable("receptionNumber") int receptionNumber,
         @AuthenticationPrincipal String userId
     ) {

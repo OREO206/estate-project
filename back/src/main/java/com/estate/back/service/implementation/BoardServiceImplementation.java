@@ -162,7 +162,7 @@ public class BoardServiceImplementation implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> puBoard(PutBoardRequestDto dto, int receptionNumber, String userId) {
+    public ResponseEntity<ResponseDto> putBoard(PutBoardRequestDto dto, int receptionNumber, String userId) {
         
         try {
 
